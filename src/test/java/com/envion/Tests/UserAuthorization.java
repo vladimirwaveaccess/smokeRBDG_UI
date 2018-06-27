@@ -4,6 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class UserAuthorization extends BaseTest{
+    protected static String titleOfElement;
+    protected static String titleMainPage = "RBdigital Gateway";
+
     @Test(priority=1)
     public void testLogin() {
         app.login.login(validUser);
@@ -13,13 +16,14 @@ public class UserAuthorization extends BaseTest{
     @Test(priority=2)
     public void testOpenComicsPage() {
         app.dashboard.openComics();
-        Assert.assertEquals(app.dashboard.checkThatComicsPageOpen(), "RBdigital Comics");
+        Assert.assertEquals(app.dashboard.checkThatNecessaryServicesPageOpen(), "RBdigital Comics");
     }
 
     @Test(priority=3)
     public void testOpenCheckoutComicPage() {
-        app.dashboard.checkoutComics();
-        Assert.assertEquals(app.dashboard.checkThatComicCheckout(), "110 Percent");
+        titleOfElement = app.dashboard.getTitleSelectedElement();
+        app.dashboard.checkoutSelectedElement();
+        Assert.assertEquals(app.dashboard.getTitleOfElementAfterCheckout(), titleOfElement);
     }
 
     @Test(priority=4)
@@ -28,17 +32,58 @@ public class UserAuthorization extends BaseTest{
     }
 
     @Test(priority=5)
-    public void testStayInBrowser() {
-        app.dashboard.closeSuccessWindow();
+    public void testStayInBrowserComics() {
+        app.dashboard.closeSuccessWindowKeepBrowsing();
     }
-    
+
     @Test(priority=6)
     public void testCheckMyComicsCollectionPage() {
         app.dashboard.openMyCollectionPage();
-        Assert.assertEquals(app.dashboard.checkingCheckoutComics(), "Read May 19, 2017 issue of 110 Percent");
+        Assert.assertEquals(app.dashboard.getTitleSelectedElement().contains(titleOfElement),true);
     }
 
     @Test(priority=7)
+    public void testBackToMainPageFromComicServicePage() {
+        app.dashboard.openMainServicePage();
+        Assert.assertEquals(app.dashboard.getTitleMainpage(), titleMainPage);
+    }
+
+    @Test(priority=8)
+    public void testOpenMagazinesPage() {
+        app.dashboard.openMagazinesCheckoutPage();
+        Assert.assertEquals(app.dashboard.checkThatNecessaryServicesPageOpen(), "RBdigital Magazines");
+    }
+
+    @Test(priority=9)
+    public void testOpenCheckoutMagazinePage() {
+        titleOfElement = app.dashboard.getTitleSelectedElement();
+        app.dashboard.checkoutSelectedElement();
+        Assert.assertEquals(app.dashboard.getTitleOfElementAfterCheckout(), titleOfElement);
+    }
+
+    @Test(priority=10)
+    public void testDoCheckoutMagazine() {
+        app.dashboard.pushCheckout();
+    }
+
+    @Test(priority = 11)
+    public void testStayInBrowserMagazines() {
+        app.dashboard.closeSuccessWindowKeepBrowsing();
+    }
+
+    @Test(priority = 12)
+    public void testCheckMyMagazineCollectionPage() {
+        app.dashboard.openMyCollectionPage();
+        Assert.assertEquals(app.dashboard.getTitleSelectedElement().contains(titleOfElement),true);
+    }
+
+    @Test(priority = 13)
+    public void testBackToMainPageFromMagazinesServicePage() {
+        app.dashboard.openMainServicePage();
+        Assert.assertEquals(app.dashboard.getTitleMainpage(), titleMainPage);
+    }
+
+    @Test(priority=14)
     public void testLogOut() {
         app.dashboard.logout();
         Assert.assertEquals(app.dashboard.checkLogout(), "Login");

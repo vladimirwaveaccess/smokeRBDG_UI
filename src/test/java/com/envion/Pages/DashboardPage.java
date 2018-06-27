@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.concurrent.TimeUnit;
 
 public class DashboardPage extends BasePage {
+
 	@FindBy(xpath="//div[@class='welcome']")
 	private WebElement userEmail;
 
@@ -18,31 +19,47 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//div[@class='login_block']//a[@href='#']")
 	private WebElement checkLogOut;
 
-	@FindBy(xpath="//div[@class='service']//div[@class='service-inner']//a[@class='service_image comics']")
+	@FindBy(xpath="//a[@class='service_image comics']")
 	private WebElement iconComicsPage;
 
 	@FindBy(id="zinio_collection_title")
-	private WebElement checkOpenComicsPage;
+	private WebElement titleOpenServiccessPage;
 
-	@FindBy(xpath="//div[@class='magazine-card']//a[@title='110 Percent']")
-	private WebElement checkoutComics;
-
+	/**
+	 * Xpath to title of comic/magazine
+	 */
 	@FindBy(xpath="//h3[@class='magazine_name']")
-	private WebElement checkCheckoutComic;
+	private WebElement titleOfElementAfterCheckout;
 
 	@FindBy(xpath="//a[@class='my_collection_link']")
 	private WebElement myCollectionLink;
 
+	/**
+	 * Xpath to 'Checkout' button
+	 */
 	@FindBy(xpath="//a[@class='button']")
 	private WebElement btnCheckout;
 
-	@FindBy(xpath="//button[@class='close']")
-	private WebElement btnCloseSuccess;
+	@FindBy(xpath="//div[@class='dialog modal in']//*[contains(text(),'Keep Browsing')]")
+	private WebElement btnKeepBrowsing;
 
+	/**
+	 * Find "Magazine" icon on the main page
+	 */
+	@FindBy(xpath="//a[@class='service_image magazines']")
+	private WebElement iconMagazinePage;
 
-	@FindBy(xpath="//a[@title='Read May 19, 2017 issue of 110 Percent']")
-	private WebElement findComicOnMyComicsCollectionPage;
+	/**
+	 * Back to the main page from service page
+	 */
+	@FindBy(xpath="//div[@class='page_relation']//*[contains(text(),'RBdigital Gateway')]")
+	private WebElement backToMainPageFromServicePage;
 
+	/**
+	 * Open checkout page for magazine
+	 */
+	@FindBy(xpath="//div[@class='magazines']//div[1]//a[1]")
+	private WebElement getDataElementForCheckout;
 
 
 	/**
@@ -79,25 +96,24 @@ public class DashboardPage extends BasePage {
 	/**
 	 * Checking that Comics page open
 	 */
-	public String checkThatComicsPageOpen() {
-		return checkOpenComicsPage.getText();
+	public String checkThatNecessaryServicesPageOpen() {
+		return titleOpenServiccessPage.getText();
 	}
-
 
 	/**
 	 * Do checkout comics
 	 */
-	public void getCheckoutComics() {
-		checkoutComics.click();
+	public void getCheckoutSelectedElement() {
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		getDataElementForCheckout.click();
 	}
 
 	/**
 	 * Check that checkout did
 	 */
-	public String checkThatComicCheckout() {
-		return checkCheckoutComic.getText();
+	public String getTitleOfElementAfterCheckout() {
+		return titleOfElementAfterCheckout.getText();
 	}
-
 
 	/**
 	 * Click on the "My Collection" text link
@@ -106,7 +122,6 @@ public class DashboardPage extends BasePage {
 		myCollectionLink.click();
 	}
 
-
 	/**
 	 * Click "Checkout" button on the checkout comic page
 	 */
@@ -114,20 +129,30 @@ public class DashboardPage extends BasePage {
 		btnCheckout.click();
 	}
 
-
-	/**
-	 * Method is returned title of comics which was checkouted
-	 */
-	public String checkingCheckoutComics() {
-		return findComicOnMyComicsCollectionPage.getAttribute("title");
-	}
-
-
 	/**
 	 * Method which closes the window about a successful check
 	 */
-	public void pushButtonCloseSuccessWindow() {
+	public void pushButtonKeepBrowsing() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		btnCloseSuccess.click();
+		btnKeepBrowsing.click();
+	}
+
+	public void backToMainPage() {
+		backToMainPageFromServicePage.click();
+	}
+
+	public void openMagazinesPage() {
+		iconMagazinePage.click();
+	}
+
+	public String getTitleMainpage() {
+		return driver.getTitle();
+	}
+
+	/**
+	 * Method is returned title selected element before checkout
+	 */
+	public String getTitleSelectedElement() {
+		return getDataElementForCheckout.getAttribute("title");
 	}
 }

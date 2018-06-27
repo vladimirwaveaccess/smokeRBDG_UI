@@ -11,19 +11,27 @@ public class DashboardHelper extends DashboardPage {
         openComicsPage();
     }
 
-    public void checkoutComics() {
-        getCheckoutComics();
+    public void checkoutSelectedElement() {
+        getCheckoutSelectedElement();
     }
 
     public void pushCheckout() {
         clickButtonCheckout();
     }
 
-    public void closeSuccessWindow() {
-        pushButtonCloseSuccessWindow();
+    public void closeSuccessWindowKeepBrowsing() {
+        pushButtonKeepBrowsing();
     }
 
     public void openMyCollectionPage() {
         clickMyCollectionLink();
+    }
+
+    public void openMainServicePage() {
+        backToMainPage();
+    }
+
+    public void openMagazinesCheckoutPage() {
+        openMagazinesPage();
     }
 }
