@@ -10,7 +10,6 @@ public class UserAuthorization extends BaseTest{
     @Test(priority=1)
     public void testCreateNewUser() {
         app.create.createUser(randomUser);
-        System.out.println(randomUser.getLogin());
         Assert.assertEquals(app.dashboard.getUserEmail().contains(randomUser.getLogin()),true);
     }
 
