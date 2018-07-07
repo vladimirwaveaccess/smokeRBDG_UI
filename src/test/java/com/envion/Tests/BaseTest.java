@@ -9,6 +9,8 @@ import org.testng.annotations.AfterSuite;
 public class BaseTest {
     static App app = new App();
     static User validUser = Factory.Users.getValidUser();
+    static User randomUser = Factory.Users.getRandomUser();
+
 
     @AfterSuite
     public void tearDown() {

@@ -61,6 +61,12 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//div[@class='magazines']//div[1]//a[1]")
 	private WebElement getDataElementForCheckout;
 
+	@FindBy(xpath="//div[@class='magazines']//div[1]//span[@class='image trash']")
+	private WebElement deleteElement;
+
+	@FindBy(xpath="//div[@class='collection_page selected']//*[contains(text(),'no data')]")
+	private WebElement noDataElement;
+
 
 	/**
 	 * Verification of successful user authorization
@@ -154,5 +160,13 @@ public class DashboardPage extends BasePage {
 	 */
 	public String getTitleSelectedElement() {
 		return getDataElementForCheckout.getAttribute("title");
+	}
+
+	public void deleteIssue() {
+		deleteElement.click();
+	}
+
+	public String getTitleEmptyCollection() {
+		return noDataElement.getText();
 	}
 }

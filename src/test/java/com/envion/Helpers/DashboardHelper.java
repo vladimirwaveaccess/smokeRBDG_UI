@@ -34,4 +34,14 @@ public class DashboardHelper extends DashboardPage {
     public void openMagazinesCheckoutPage() {
         openMagazinesPage();
     }
+
+    public void deleteCheckoutComics() {
+        deleteIssue();
+        driver.switchTo().alert().accept();
+    }
+
+    public void deleteCheckoutMagazines() {
+        deleteIssue();
+        driver.switchTo().alert().accept();
+    }
 }
