@@ -11,9 +11,9 @@ public class BaseTest {
     static User validUser = Factory.Users.getValidUser();
     static User randomUser = Factory.Users.getRandomUser();
 
-
+/*
     @AfterSuite
     public void tearDown() {
         app.common.closeApp();
-    }
+    }*/
 }

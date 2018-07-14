@@ -67,6 +67,16 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//div[@class='collection_page selected']//*[contains(text(),'no data')]")
 	private WebElement noDataElement;
 
+	@FindBy(xpath="//a[contains(text(),'My Preferences')]")
+	private WebElement myPreferencesLink;
+
+	@FindBy(xpath="//div[@class='page_relation']")
+	private WebElement namePageMyPreferences;
+
+	@FindBy(xpath="//a[contains(text(),'My Account')]")
+	private WebElement myAccountLink;
+
+
 
 	/**
 	 * Verification of successful user authorization
@@ -169,4 +179,20 @@ public class DashboardPage extends BasePage {
 	public String getTitleEmptyCollection() {
 		return noDataElement.getText();
 	}
+
+	public void myPreferencesLink() {
+		myPreferencesLink.click();
+	}
+
+	public void userMenuClick() {
+		userMenu.click();
+	}
+
+	public String getNamePageMyPreferences() {
+		return namePageMyPreferences.getText();
+	}
+
+	public void myAccountLinkClick() {
+	    myAccountLink.click();
+    }
 }

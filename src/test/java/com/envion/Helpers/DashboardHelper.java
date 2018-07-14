@@ -44,4 +44,14 @@ public class DashboardHelper extends DashboardPage {
         deleteIssue();
         driver.switchTo().alert().accept();
     }
+
+    public void openMyPreferencesPage() {
+        userMenuClick();
+        myPreferencesLink();
+    }
+
+    public void openMyAccountPage() {
+        userMenuClick();
+        myAccountLinkClick();
+    }
 }
